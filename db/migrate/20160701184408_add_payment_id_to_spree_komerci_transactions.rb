@@ -1,5 +1,6 @@
 class AddPaymentIdToSpreeKomerciTransactions < ActiveRecord::Migration
   def change
-    add_reference :spree_komerci_transactions, :payment, index: true, foreign_key: true
+    add_column :spree_komerci_transactions, :payment_id, :integer
+    add_index :spree_komerci_transactions, :payment_id
   end
 end
