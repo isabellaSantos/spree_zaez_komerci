@@ -1,0 +1,62 @@
+<div class="well clearfix">
+  <% param_prefix = "payment_source[#{payment_method.id}]" %>
+
+  <div class="row">
+    <div class="col-md-12 field">
+      <%= label_tag "name_on_card_#{payment_method.id}", Spree.t(:name_on_card) %><span class="required">*</span><br />
+      <%= text_field_tag "#{param_prefix}[name]", "#{@order.billing_firstname} #{@order.billing_lastname}",
+                         { id: "name_on_card_#{payment_method.id}", class: 'form-control required'} %>
+    </div>
+    <div class="col-md-12 field">
+      <%= label_tag 'card_number', Spree.t(:card_number) %><span class="required">*</span><br />
+      <% options_hash = Rails.env.production? ? {:autocomplete => 'off'} : {} %>
+      <%= text_field_tag "#{param_prefix}[number]", '', options_hash.merge(id: 'cielo_card_number',
+                                                                           class: 'form-control required cardNumber komerci-cc',
+                                                                           size: 19,
+                                                                           maxlength: 19,
+                                                                           autocomplete: 'off') %>
+      <span id="komerci_unrecognized" style="display:none;" class="error"><%= Spree.t(:unrecognized_card_type) %></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 field" data-hook="card_expiration">
+      <%= label_tag 'card_expiry', Spree.t(:expiration) %><span class="required">*</span><br />
+      <%= text_field_tag "#{param_prefix}[expiry]", '', id: 'card_expiry',
+                         class: 'form-control required cardExpiry', placeholder: 'MM / YY' %>
+    </div>
+    <div class="col-md-4 field" data-hook="card_code">
+      <%= label_tag 'card_code', Spree.t(:card_code) %><span class="required">*</span><br />
+      <%= text_field_tag "#{param_prefix}[verification_value]", '', options_hash.merge(id: 'card_code',
+                                                                                       class: 'form-control required cardCode',
+                                                                                       size: 5) %>
+    </div>
+  </div>
+  <div class="row komerci-info">
+    <% portions = Spree::KomerciConfig.calculate_portions @order %>
+    <div class="col-sm-10">
+      <% portions.each do |item| %>
+          <%
+             total = Spree::Money.new(item[:total], {currency: @order.currency}).to_html
+             value = Spree::Money.new(item[:value], {currency: @order.currency}).to_html
+          %>
+          <%= radio_button_tag 'order[payments_attributes][][portions]', item[:portion], item[:portion] == 1 %>
+          <%= Spree.t(:komerci_portions, times: item[:portion], value: value,
+                      tax: Spree.t(item[:tax_message]), total: total) %><br />
+      <% end %>
+    </div>
+    <div class="col-sm-2" id="komerci_cc_type"></div>
+  </div>
+
+  <%= hidden_field_tag "#{param_prefix}[cc_type]", '', id: 'cc_type' %>
+</div>
+
+<script type="text/javascript">
+  available_cc = {
+    visa: '<%= asset_url 'rede-credit-cards/rede-visa.png' %>',
+    mastercard: '<%= asset_url 'rede-credit-cards/rede-mastercard.png' %>',
+    dinersclub: '<%= asset_url 'rede-credit-cards/rede-dinersclub.png' %>',
+    hipercard: '<%= asset_url 'rede-credit-cards/rede-hipercard.png' %>',
+    jcb: '<%= asset_url 'rede-credit-cards/rede-jcb.png' %>'
+  };
+  new window.KomerciCreditCard(available_cc);
+</script>

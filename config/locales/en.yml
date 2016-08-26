@@ -1,0 +1,31 @@
+en:
+  spree:
+    komerci_settings: Komerci Settings
+    settings: Settings
+    affiltion_key: Affilition Key
+    komerci_user: Komerci User
+    komerci_password: Password of Komerci User
+    test_mode: Enable Test Mode
+    minimum_value: Minimum Value
+    portion_without_tax: Portions Without Tax
+    max_portion: Quantity of Portions Supported
+    tax_value: Tax Value
+    portions_type: Portions Type
+    portions_type_06: Portions by Issuing
+    portions_type_08: Portions by Store
+    komerci_without_tax: without tax.
+    komerci_with_tax: with tax.
+    komerci_adjustment_tax: Credit Card Tax
+    komerci_portions: "%{times}x of %{value} %{tax} (total: %{total})"
+    komerci:
+      messages:
+        purchase_success: "Komerci: transaction purchased successfully"
+        authorize_success: "Komerci: transaction authorized successfully"
+        capture_success: "Komerci: captured successfully"
+        void_success: "Komerci: Voided successfully"
+        cancel_success: "Komerci: Canceled successfully"
+        invalid_portions: "Komerci: The number of portions is required"
+  activerecord:
+    attributes:
+      spree/payment:
+        portions: Portions

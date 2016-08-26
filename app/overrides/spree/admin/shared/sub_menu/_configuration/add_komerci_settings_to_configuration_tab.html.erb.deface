@@ -1,0 +1,2 @@
+<!-- insert_bottom "[data-hook='admin_configurations_sidebar_menu'], #admin_configurations_sidebar_menu[data-hook]" -->
+<%= configurations_sidebar_menu_item(t(:komerci_settings), edit_admin_komerci_settings_path) if can? :manage, :komerci_settings %>

@@ -1,0 +1,1 @@
+//= require ../frontend/app/komerci_credit_card

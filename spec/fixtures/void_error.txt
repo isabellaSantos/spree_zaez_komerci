@@ -1,0 +1,7 @@
+<?xml version=”1.0” encoding=”utf-8”?>
+<CONFIRMATION>
+  <root>
+    <codret>97</codret>
+    <msgret>Data de estorno expirou</msgret>
+  </root>
+</CONFIRMATION>

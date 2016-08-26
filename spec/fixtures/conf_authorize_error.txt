@@ -1,0 +1,7 @@
+<?xml version=”1.0” encoding=”utf-8”?>
+<CONFIRMATION>
+  <root>
+    <codret>98</codret>
+    <msgret>Cartão inválido</msgret>
+  </root>
+</CONFIRMATION>

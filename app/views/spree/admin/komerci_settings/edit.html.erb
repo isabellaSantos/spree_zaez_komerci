@@ -1,0 +1,67 @@
+<%= render partial: 'spree/admin/shared/sub_menu/configuration' %>
+
+<% content_for :page_title do %>
+    <%= Spree.t(:komerci_settings) %>
+<% end %>
+
+<%= form_tag admin_komerci_settings_path, method: :put  do |form| %>
+    <div id="komerci_preferences" data-hook="komerci_preferences" xmlns="http://www.w3.org/1999/html">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title">
+            <%= Spree.t(:settings) %>
+          </h1>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-4">
+              <%= label_tag(:afiliation_key, Spree.t(:afiliation_key) + ': ') + tag(:br) %>
+              <%= text_field_tag :afiliation_key, @config.afiliation_key, class: 'form-control' %>
+            </div>
+            <div class="col-sm-4">
+              <%= label_tag(:komerci_user, Spree.t(:komerci_user) + ': ') + tag(:br) %>
+              <%= text_field_tag :komerci_user, @config.komerci_user, class: 'form-control' %>
+            </div>
+            <div class="col-sm-4">
+              <%= label_tag(:komerci_password, Spree.t(:komerci_password) + ': ') + tag(:br) %>
+              <%= text_field_tag :komerci_password, @config.komerci_password, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <%= check_box_tag :test_mode, true, @config.test_mode %>
+              <%= label_tag(:test_mode) %>
+            </div>
+            <div class="col-sm-6">
+              <%= label_tag(:portions_type, Spree.t(:portions_type) + ': ') + tag(:br) %>
+              <%= radio_button_tag :portions_type, '06', @config.portions_type == '06' %>
+              <%= label_tag :portions_type_06, Spree.t(:portions_type_06)  %>
+              <%= radio_button_tag :portions_type, '08', @config.portions_type == '08' %>
+              <%= label_tag :portions_type_08, Spree.t(:portions_type_08) %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <%= label_tag(:minimum_value, Spree.t(:minimum_value) + ': ') + tag(:br) %>
+              <%= text_field_tag :minimum_value, @config.minimum_value, class: 'form-control' %>
+            </div>
+            <div class="col-sm-6">
+              <%= label_tag(:tax_value, Spree.t(:tax_value) + ': ') + tag(:br) %>
+              <%= text_field_tag :tax_value, @config.tax_value, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <%= label_tag(:portion_without_tax, Spree.t(:portion_without_tax) + ': ') + tag(:br) %>
+              <%= number_field_tag :portion_without_tax, @config.portion_without_tax, class: 'form-control' %>
+            </div>
+            <div class="col-sm-6">
+              <%= label_tag(:max_portion, Spree.t(:max_portion) + ': ') + tag(:br) %>
+              <%= number_field_tag :max_portion, @config.max_portion, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= render partial: 'spree/admin/shared/edit_resource_links', locals: { collection_url: edit_admin_komerci_settings_url } %>
+<% end %>

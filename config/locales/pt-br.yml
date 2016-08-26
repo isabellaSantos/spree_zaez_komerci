@@ -1,0 +1,32 @@
+pt-BR:
+  spree:
+    komerci_settings: Configurações Komerci
+    settings: Configuraçcões
+    affiltion_key: Número de Filiação
+    komerci_user: Usuário Komerci
+    komerci_password: Senha
+    test_mode: Habilitar ambiente de teste
+    minimum_value: Valor mínimo da parcela
+    portion_without_tax: Parcelas sem juros
+    max_portion: Quantidade máxima de parcelas
+    tax_value: Valor do juros
+    portions_type: Tipo de parcelamento
+    portions_type_06: Parcelado pelo emissor
+    portions_type_08: Parcelado pelo estabelecimento
+    komerci_without_tax: sem juros.
+    komerci_with_tax: com juros.
+    komerci_adjustment_tax: Juros do Cartão de Crédito
+    komerci_portions: "%{times}x de %{value} %{tax} (total: %{total})"
+    komerci:
+      messages:
+        purchase_success: "Komerci: transação processada com sucesso"
+        authorize_success: "Komerci: transação autorizada com sucesso"
+        capture_success: "Komerci: Capturado com sucesso"
+        void_success: "Komerci: Estornado com sucesso"
+        cancel_success: "Komerci: Cancelado com sucesso"
+        cancel_error_date: "Komerci: O cancelamento deve ser realizado no Portal pois o período para cancelar pelo e-commerce se encerrou."
+        invalid_portions: "Komerci: O número de parcelas é requerido"
+  activerecord:
+    attributes:
+      spree/payment:
+        portions: Parcelas
