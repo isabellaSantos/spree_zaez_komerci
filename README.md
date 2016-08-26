@@ -1,7 +1,7 @@
 Spree Zaez Komerci
 ==============
 
-This gem implements some funcionalities of Komerci (an [Rede](https://userede.com.br)) to Spree Commerce.
+This gem implements some funcionalities of Komerci (a product of [Rede](https://userede.com.br)) to Spree Commerce.
 
 Installation
 ------------
