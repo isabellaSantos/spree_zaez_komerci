@@ -56,7 +56,7 @@ class Spree::KomerciConfiguration < Spree::Preferences::Configuration
           success: false,
           data: {
               error_number: authorization[:codret],
-              error_message: authorization[:msgret]
+              error_message: format_response(authorization[:msgret], authorization[:codret])
           }
       }
     end
@@ -64,7 +64,7 @@ class Spree::KomerciConfiguration < Spree::Preferences::Configuration
     {
         success: false,
         data: {
-            error_message: response_xml.body.gsub("\r\n", '')
+            error_message: format_response(response_xml.body.gsub("\r\n", ''))
         }
     }
   end
@@ -82,7 +82,7 @@ class Spree::KomerciConfiguration < Spree::Preferences::Configuration
           success: false,
           data: {
               error_number: confirmation[:codret],
-              error_message: confirmation[:msgret]
+              error_message: format_response(confirmation[:msgret], confirmation[:codret])
           }
       }
     end
@@ -90,7 +90,7 @@ class Spree::KomerciConfiguration < Spree::Preferences::Configuration
     {
         success: false,
         data: {
-            error_message: response_xml.body.gsub("\r\n", '')
+            error_message: format_response(response_xml.body.gsub("\r\n", ''))
         }
     }
   end
@@ -108,7 +108,7 @@ class Spree::KomerciConfiguration < Spree::Preferences::Configuration
           success: false,
           data: {
               error_number: confirmation[:codret],
-              error_message: confirmation[:msgret]
+              error_message: format_response(confirmation[:msgret], confirmation[:codret])
           }
       }
     end
@@ -116,7 +116,7 @@ class Spree::KomerciConfiguration < Spree::Preferences::Configuration
     {
         success: false,
         data: {
-            error_message: response_xml.body.gsub("\r\n", '')
+            error_message: format_response(response_xml.body.gsub("\r\n", ''))
         }
     }
   end
@@ -185,6 +185,21 @@ class Spree::KomerciConfiguration < Spree::Preferences::Configuration
       result[(key.downcase.to_sym rescue key) || key] = value
       result
     }
+  end
+
+  def format_response(message, code = nil)
+    if code
+      case code.to_s
+        when '77'
+          return 'Problemas com o cartão. Por favor, verifique os dados de seu cartão. Caso o erro persista, entre em contato com a central de atendimento de seu cartão.'
+        when '27'
+          return 'Cartão inválido. Tente novamente.'
+        else
+          return message.force_encoding('UTF-8')
+      end
+    else
+      return message.force_encoding('UTF-8')
+    end
   end
 
 end
