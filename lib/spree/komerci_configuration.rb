@@ -190,6 +190,8 @@ class Spree::KomerciConfiguration < Spree::Preferences::Configuration
   def format_response(message, code = nil)
     if code
       case code.to_s
+        when '23'
+          return 'Transação não autorizada.'
         when '77'
           return 'Problemas com o cartão. Por favor, verifique os dados de seu cartão. Caso o erro persista, entre em contato com a central de atendimento de seu cartão.'
         when '27'
